@@ -17,13 +17,13 @@ export const db = {
       })
       localStorage.setItem('storages', JSON.stringify(currentData))
     },
-    findMany: (filter: Record<string, any>) => {
+    findMany: (filter: Record<string, unknown>) => {
       const currentData = db.storage.getAll()
       return currentData.filter((d) => {
         return Object.keys(filter).every((key) => d[key].includes(filter[key]))
       })
     },
-    findFirst: (filter: Record<string, any>) => {
+    findFirst: (filter: Record<string, unknown>) => {
       const currentData = db.storage.getAll()
       return currentData.find((d) => {
         return Object.keys(filter).every((key) => {
@@ -34,7 +34,7 @@ export const db = {
         })
       })
     },
-    delete: (filter: Record<string, any>) => {
+    delete: (filter: Record<string, unknown>) => {
       const currentData = db.storage.getAll()
       const newData = currentData.filter((d) => {
         return Object.keys(filter).every((key) => d[key] !== filter[key])
@@ -57,7 +57,7 @@ export const db = {
       })
       localStorage.setItem('parts', JSON.stringify(currentData))
     },
-    findMany: (filter: Record<string, any>) => {
+    findMany: (filter: Record<string, unknown>) => {
       const currentData = db.parts.getAll()
 
       return currentData
@@ -74,7 +74,7 @@ export const db = {
           }
         })
     },
-    findFirst: (filter: Record<string, any>) => {
+    findFirst: (filter: Record<string, unknown>) => {
       const currentData = db.parts.getAll()
       return currentData.find((d) => {
         return Object.keys(filter).every((key) => {
@@ -85,14 +85,14 @@ export const db = {
         })
       })
     },
-    delete: (filter: Record<string, any>) => {
+    delete: (filter: Record<string, unknown>) => {
       const currentData = db.parts.getAll()
       const newData = currentData.filter((d) => {
         return Object.keys(filter).every((key) => d[key] !== filter[key])
       })
       localStorage.setItem('parts', JSON.stringify(newData))
     },
-    update: (data: UpdateParts, filter: Record<string, any>) => {
+    update: (data: UpdateParts, filter: Record<string, unknown>) => {
       const currentData = db.parts.getAll()
       const part = db.parts.findFirst(filter)
       const newData = {

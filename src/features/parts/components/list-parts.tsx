@@ -1,13 +1,4 @@
-import {
-  ChevronDown,
-  ChevronsDown,
-  ChevronsUp,
-  ChevronsUpDown,
-  ChevronUp,
-  Inbox,
-  Search,
-  Trash2,
-} from 'lucide-react'
+import { Inbox, Search, Trash2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
