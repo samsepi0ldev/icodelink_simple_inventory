@@ -26,7 +26,7 @@ export function CreateStorageForm() {
   return (
     <form
       onSubmit={handleSubmit(handleCreateStorage)}
-      className="flex gap-4 w-full"
+      className="flex flex-col lg:flex-row gap-4 w-full"
     >
       <Controller
         control={control}

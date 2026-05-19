@@ -1,4 +1,4 @@
-import { Inbox, Search, Trash2 } from 'lucide-react'
+import { Inbox, Search, Trash2, Underline } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
@@ -25,18 +25,19 @@ import {
   useUpdatePart,
 } from '@/features/parts/hooks/parts-mutations'
 import { useParts } from '@/features/parts/hooks/parts-queries'
+import type { Parts } from '@/features/parts/types/parts'
 import { cn } from '@/lib/utils'
 
 const SORT = ['none', 'ascending', 'descending'] as const
 
 type SortType = {
-  col: string
+  col: keyof Parts
   dir: (typeof SORT)[number]
 }
 
 export function ListParts() {
   const [search, setSearch] = useState('')
-  const [sort, setSort] = useState<SortType>({ col: 'none', dir: 'none' })
+  const [sort, setSort] = useState<SortType>({ col: 'name', dir: 'none' })
   const { data: parts } = useParts()
   const deletePart = useDeletePart()
   const updatePart = useUpdatePart()
@@ -49,7 +50,7 @@ export function ListParts() {
         p.location.toLowerCase().includes(q),
     )
 
-    if (sort.dir !== 'none') {
+    if (sort.dir !== 'none' && list !== undefined) {
       list = [...list].sort((a, b) => {
         let va = a[sort.col]
         let vb = b[sort.col]
@@ -72,7 +73,7 @@ export function ListParts() {
     await updatePart.mutate({ quantity: quantity - 1, id })
   }
 
-  function handleSort(col: string) {
+  function handleSort(col: keyof Parts) {
     setSort((prev) => {
       const nextIndex = (SORT.indexOf(prev.dir) + 1) % SORT.length
       return {
@@ -82,13 +83,13 @@ export function ListParts() {
     })
   }
 
-  const cols = [
+  const cols: { key: keyof Parts; label: string }[] = [
     { key: 'name', label: 'Nome da Peça' },
     { key: 'location', label: 'Local' },
     { key: 'quantity', label: 'Qtd.' },
   ]
   return (
-    <Card className="mt-10">
+    <Card className="mx-4 mt-10">
       <CardHeader>
         <div className="flex gap-2">
           <CardIcon>
@@ -96,9 +97,9 @@ export function ListParts() {
           </CardIcon>
           <CardTitle>
             Estoque
-            {filtered?.length > 0 && (
+            {!filtered?.length && (
               <Badge className="bg-blue-500/16 text-blue-500 ml-2">
-                {filtered.length}
+                {filtered?.length}
               </Badge>
             )}
           </CardTitle>

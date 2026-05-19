@@ -36,7 +36,7 @@ export function CreatePartForm() {
   return (
     <form
       onSubmit={handleSubmit(handleCreateParts)}
-      className="grid grid-cols-3 gap-4 w-full"
+      className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full"
     >
       <Controller
         control={control}
@@ -44,7 +44,7 @@ export function CreatePartForm() {
         render={({ field, fieldState }) => (
           <FieldGroup
             data-invalid={fieldState.invalid}
-            className="col-span-3 space-y-2"
+            className="lg:col-span-3 space-y-2"
           >
             <FieldLabel data-active>Nome da Peça</FieldLabel>
             <Input
@@ -63,7 +63,7 @@ export function CreatePartForm() {
         render={({ field, fieldState }) => (
           <FieldGroup
             data-invalid={fieldState.invalid}
-            className="col-span-1 space-y-2"
+            className="lg:col-span-1 space-y-2"
           >
             <FieldLabel data-active>Local</FieldLabel>
             <Select
@@ -102,7 +102,7 @@ export function CreatePartForm() {
         render={({ field, fieldState }) => (
           <FieldGroup
             data-invalid={fieldState.invalid}
-            className="col-span-2 space-y-2"
+            className="lg:col-span-2 space-y-2"
           >
             <FieldLabel data-active>Quantidade</FieldLabel>
             <Input

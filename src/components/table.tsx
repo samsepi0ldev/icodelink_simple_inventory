@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 
 export function Table({ className, ...props }: React.ComponentProps<'table'>) {
   return (
-    <div className="w-full border border-border rounded-xl overflow-hidden">
+    <div className="w-full border border-zinc-200 dark:border-border rounded-xl overflow-hidden">
       <table
         className={cn('w-full caption-bottom text-xs', className)}
         {...props}
@@ -32,7 +32,7 @@ export function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
   return (
     <tr
       className={cn(
-        'border-b transition-colors border-b-border text-text-h hover:bg-zinc-900/30',
+        'border-b transition-colors border-zinc-200 hover:bg-zinc-50 dark:border-b-border dark:hover:bg-zinc-900/30',
         className,
       )}
       {...props}
@@ -56,7 +56,7 @@ export function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
   return (
     <th
       className={cn(
-        '[&>svg]:size-3 [&>svg]:text-text text-left px-3.5 py-2.5 bg-zinc-950/30 hover:bg-zinc-900/50 uppercase  align-middle font-medium whitespace-nowrap has-[[role=checkbox]]:pr-0',
+        'select-none [&>svg]:size-3 [&>svg]:text-text text-left px-3.5 py-2.5 bg-zinc-50/75 hover:bg-zinc-200/50 dark:bg-zinc-950/30 dark:hover:bg-zinc-900/50 uppercase align-middle font-medium whitespace-nowrap has-[[role=checkbox]]:pr-0',
         className,
       )}
       {...props}

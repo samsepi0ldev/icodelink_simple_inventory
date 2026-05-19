@@ -35,7 +35,7 @@ export function SelectTrigger({
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        'flex w-fit rounded-lg bg-bg px-2.5 py-1.5 outline-none ring-2 ring-transparent hover:ring-violet-500 focus-visible:ring-violet-500 text-text text-sm data-[invalid=true]:ring-red-500 items-center justify-between gap-1.5 h-7 whitespace-nowrap transition-colors',
+        'flex w-fit rounded-lg bg-zinc-300 dark:bg-bg px-2.5 py-1.5 outline-none ring-2 ring-transparent hover:ring-violet-500 focus-visible:ring-violet-500 text-zinc-900 dark:text-text text-sm data-[invalid=true]:ring-red-500 items-center justify-between gap-1.5 h-7 whitespace-nowrap transition-colors',
         className,
       )}
       {...props}
@@ -59,7 +59,7 @@ export function SelectContent({
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
         className={cn(
-          'relative z-50 max-h-(--radix-select-content-available-height) min-w-36 origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-bg text-text shadow-md',
+          'relative z-50 max-h-(--radix-select-content-available-height) min-w-36 origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-zinc-300 border border-zinc-400/50 dark:bg-bg text-zinc-900 dark:text-text shadow-md',
         )}
         position={position}
         align={align}
@@ -79,7 +79,7 @@ export function SelectItem({
   return (
     <SelectPrimitive.Item
       className={cn(
-        "relative flex w-full cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent-bg focus:text-accent [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        "relative flex w-full cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-violet-950 dark:focus:bg-accent-bg dark:focus:text-accent [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
         className,
       )}
       {...props}

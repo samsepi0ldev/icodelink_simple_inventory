@@ -17,8 +17,9 @@ export function ListStorages() {
       {storages?.map((storage) => (
         <li
           key={storage.id.toString()}
-          className="flex items-center justify-center gap-1.5 rounded-md py-1.5 pr-2.5 pl-3 bg-social-bg text-text border border-border"
+          className="flex items-center justify-center gap-1.5 rounded-md py-1.5 pr-2.5 pl-3 bg-white dark:bg-social-bg text-zinc-700 dark:text-text border border-zinc-200 dark:border-border"
         >
+          <span>{storage.id}</span>
           {storage.name}
           <button
             type="button"

@@ -14,7 +14,7 @@ export function InventoryStats() {
   if (isLoading || isError) return null
 
   return (
-    <div className="grid grid-cols-3 space-x-4">
+    <div className="grid grid-cols-1 lg:grid-cols-3 lg:space-x-4 px-4 gap-y-4">
       <OverviewCard>
         <div className="size-12 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center">
           <Smartphone className="size-4" />
