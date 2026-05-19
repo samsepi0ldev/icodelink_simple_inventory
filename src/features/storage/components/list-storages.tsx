@@ -19,7 +19,9 @@ export function ListStorages() {
           key={storage.id.toString()}
           className="flex items-center justify-center gap-1.5 rounded-md py-1.5 pr-2.5 pl-3 bg-white dark:bg-social-bg text-zinc-700 dark:text-text border border-zinc-200 dark:border-border"
         >
-          <span>{storage.id}</span>
+          <span className="font-mono text-xs text-zinc-500">
+            #{String(storage.id).padStart(2, '0')}
+          </span>
           {storage.name}
           <button
             type="button"
