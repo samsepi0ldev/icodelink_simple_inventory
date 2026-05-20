@@ -9,50 +9,122 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './pages/__root'
-import { Route as IndexRouteImport } from './pages/index'
+import { Route as appLayoutRouteImport } from './pages/(app)/_layout'
+import { Route as appinventoryLayoutRouteImport } from './pages/(app)/(inventory)/_layout'
+import { Route as appActivityHistoryIndexRouteImport } from './pages/(app)/activity-history/index'
+import { Route as appinventoryIndexRouteImport } from './pages/(app)/(inventory)/index'
 
-const IndexRoute = IndexRouteImport.update({
+const appLayoutRoute = appLayoutRouteImport.update({
+  id: '/(app)',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appinventoryLayoutRoute = appinventoryLayoutRouteImport.update({
+  id: '/(inventory)',
+  getParentRoute: () => appLayoutRoute,
+} as any)
+const appActivityHistoryIndexRoute = appActivityHistoryIndexRouteImport.update({
+  id: '/activity-history/',
+  path: '/activity-history/',
+  getParentRoute: () => appLayoutRoute,
+} as any)
+const appinventoryIndexRoute = appinventoryIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => appinventoryLayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof appinventoryIndexRoute
+  '/activity-history/': typeof appActivityHistoryIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof appinventoryIndexRoute
+  '/activity-history': typeof appActivityHistoryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/(app)': typeof appLayoutRouteWithChildren
+  '/(app)/(inventory)': typeof appinventoryLayoutRouteWithChildren
+  '/(app)/(inventory)/': typeof appinventoryIndexRoute
+  '/(app)/activity-history/': typeof appActivityHistoryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/activity-history/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/activity-history'
+  id:
+    | '__root__'
+    | '/(app)'
+    | '/(app)/(inventory)'
+    | '/(app)/(inventory)/'
+    | '/(app)/activity-history/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  appLayoutRoute: typeof appLayoutRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/(app)': {
+      id: '/(app)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof appLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/(inventory)': {
+      id: '/(app)/(inventory)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof appinventoryLayoutRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/activity-history/': {
+      id: '/(app)/activity-history/'
+      path: '/activity-history'
+      fullPath: '/activity-history/'
+      preLoaderRoute: typeof appActivityHistoryIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/(inventory)/': {
+      id: '/(app)/(inventory)/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof appinventoryIndexRouteImport
+      parentRoute: typeof appinventoryLayoutRoute
     }
   }
 }
 
+interface appinventoryLayoutRouteChildren {
+  appinventoryIndexRoute: typeof appinventoryIndexRoute
+}
+
+const appinventoryLayoutRouteChildren: appinventoryLayoutRouteChildren = {
+  appinventoryIndexRoute: appinventoryIndexRoute,
+}
+
+const appinventoryLayoutRouteWithChildren =
+  appinventoryLayoutRoute._addFileChildren(appinventoryLayoutRouteChildren)
+
+interface appLayoutRouteChildren {
+  appinventoryLayoutRoute: typeof appinventoryLayoutRouteWithChildren
+  appActivityHistoryIndexRoute: typeof appActivityHistoryIndexRoute
+}
+
+const appLayoutRouteChildren: appLayoutRouteChildren = {
+  appinventoryLayoutRoute: appinventoryLayoutRouteWithChildren,
+  appActivityHistoryIndexRoute: appActivityHistoryIndexRoute,
+}
+
+const appLayoutRouteWithChildren = appLayoutRoute._addFileChildren(
+  appLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  appLayoutRoute: appLayoutRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

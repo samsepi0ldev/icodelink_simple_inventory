@@ -59,7 +59,7 @@ export function SelectContent({
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
         className={cn(
-          'relative z-50 max-h-(--radix-select-content-available-height) min-w-36 origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-zinc-300 border border-zinc-400/50 dark:bg-bg text-zinc-900 dark:text-text shadow-md',
+          'relative z-50 max-h-(--radix-select-content-available-height) min-w-36 origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-zinc-300 border border-zinc-400/50 dark:border-transparent dark:bg-bg text-zinc-900 dark:text-text shadow-md',
         )}
         position={position}
         align={align}

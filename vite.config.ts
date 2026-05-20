@@ -13,6 +13,7 @@ export default defineConfig({
       routesDirectory: './src/pages',
       generatedRouteTree: './src/route-tree.gen.ts',
       routeFileIgnorePrefix: '-',
+      routeToken: '_layout',
       quoteStyle: 'single',
     }),
     react(),

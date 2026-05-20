@@ -98,7 +98,7 @@ export function ListParts() {
           <CardTitle>
             Estoque
             {!filtered?.length && (
-              <Badge className="bg-blue-500/16 text-blue-500 ml-2">
+              <Badge variant="info" className="ml-2">
                 {filtered?.length}
               </Badge>
             )}
@@ -155,9 +155,7 @@ export function ListParts() {
                 <TableRow key={part.id}>
                   <TableCell>{part.name}</TableCell>
                   <TableCell>
-                    <Badge className="bg-blue-500/16 text-blue-500 px-2 py-2.5 font-bold rounded-full">
-                      {part.location}
-                    </Badge>
+                    <Badge variant="info">{part.location}</Badge>
                   </TableCell>
                   <TableCell
                     className={cn(

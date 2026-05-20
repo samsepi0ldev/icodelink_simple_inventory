@@ -3,6 +3,7 @@ import { Layers, Sun } from 'lucide-react'
 
 import { Switch } from '@/components/switch'
 import { useTheme } from '@/hooks/use-theme'
+import { CustomLink } from './link'
 
 export function Header() {
   const { toggleTheme, isDarkMode } = useTheme()
@@ -12,25 +13,13 @@ export function Header() {
         <h1 className="text-zinc-900 dark:text-text-h font-bold text-lg flex items-center gap-2">
           <Layers className="size-6" /> Storage
         </h1>
-        <nav className="flex items-center justify-center">
-          <Link
-            to="/"
-            className="w-fit rounded-md flex py-1.5 px-3 text-base items-center gap-2 [&>svg]:size-4 hover:bg-zinc-200 dark:hover:bg-social-bg transition-all"
-          >
-            Inventario
-          </Link>
-          <Link
-            to="/"
-            className="w-fit rounded-md flex py-1.5 px-3 text-base items-center gap-2 [&>svg]:size-4 hover:bg-zinc-200 dark:hover:bg-social-bg transition-all"
-          >
-            Clientes
-          </Link>
-          <Link
-            to="/"
-            className="w-fit rounded-md flex py-1.5 px-3 text-base items-center gap-2 [&>svg]:size-4 hover:bg-zinc-200 dark:hover:bg-social-bg transition-all"
-          >
-            Serviços
-          </Link>
+        <nav className="flex items-center justify-center gap-1">
+          <CustomLink to="/">Inventario</CustomLink>
+          <CustomLink to="#">Clientes</CustomLink>
+          <CustomLink to="#">Serviços</CustomLink>
+          <CustomLink to="/activity-history">
+            Histórico de atividades
+          </CustomLink>
         </nav>
         <div className="flex items-center gap-x-1 justify-end">
           <Switch defaultChecked={isDarkMode} onCheckedChange={toggleTheme} />

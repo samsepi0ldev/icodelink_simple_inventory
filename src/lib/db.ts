@@ -1,3 +1,4 @@
+import type { ActivityHistory } from '@/features/activity-history/types/activity-history'
 import type {
   CreateParts,
   UpdateParts,
@@ -10,12 +11,15 @@ export const db = {
   storage: {
     create: (data: CreateStorage) => {
       const currentData = db.storage.getAll()
-      currentData.push({
+      const newData = {
         ...data,
         id: currentData.length + 1,
         createdAt: new Date().toISOString(),
-      })
+      }
+      currentData.push(newData)
       localStorage.setItem('storages', JSON.stringify(currentData))
+
+      return newData
     },
     findMany: (filter: Record<string, unknown>) => {
       const currentData = db.storage.getAll()
@@ -50,12 +54,14 @@ export const db = {
   parts: {
     create: (data: CreateParts) => {
       const currentData = db.parts.getAll()
-      currentData.push({
+      const newData = {
         ...data,
         id: currentData.length + 1,
         createdAt: new Date().toISOString(),
-      })
+      }
+      currentData.push(newData)
       localStorage.setItem('parts', JSON.stringify(currentData))
+      return newData
     },
     findMany: (filter: Record<string, unknown>) => {
       const currentData = db.parts.getAll()
@@ -112,6 +118,30 @@ export const db = {
       const currentData = JSON.parse(localStorage.getItem('parts')) || []
 
       return currentData as Omit<Parts, 'location'>[]
+    },
+  },
+  activityHistory: {
+    create: (data: Omit<ActivityHistory, 'id' | 'createdAt'>) => {
+      const currentData = db.activityHistory.getAll()
+      const newData = {
+        ...data,
+        id: currentData.length + 1,
+        createdAt: new Date().toISOString(),
+      }
+      currentData.push(newData)
+      localStorage.setItem('activity-histories', JSON.stringify(currentData))
+    },
+    getAll: () => {
+      const currentData =
+        JSON.parse(localStorage.getItem('activity-histories')) || []
+
+      return currentData as ActivityHistory[]
+    },
+    findMany: (filter: Record<string, unknown>) => {
+      const currentData = db.activityHistory.getAll()
+      return currentData.filter((d) => {
+        return Object.keys(filter).every((key) => d[key].includes(filter[key]))
+      })
     },
   },
 }
