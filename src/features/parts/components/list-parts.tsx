@@ -1,4 +1,5 @@
-import { Inbox, Search, Trash2, Underline } from 'lucide-react'
+import { Inbox, Trash2 } from 'lucide-react'
+import { useQueryState } from 'nuqs'
 import { useMemo, useState } from 'react'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
@@ -10,7 +11,6 @@ import {
   CardIcon,
   CardTitle,
 } from '@/components/card'
-import { Input, InputGroup, InputGroupAddon } from '@/components/input'
 import { SortIcon } from '@/components/sort-icon'
 import {
   Table,
@@ -20,6 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/table'
+import { SearchParts } from '@/features/parts/components/search-parts'
 import {
   useDeletePart,
   useUpdatePart,
@@ -36,18 +37,18 @@ type SortType = {
 }
 
 export function ListParts() {
-  const [search, setSearch] = useState('')
+  const [search] = useQueryState('search')
   const [sort, setSort] = useState<SortType>({ col: 'name', dir: 'none' })
   const { data: parts } = useParts()
   const deletePart = useDeletePart()
   const updatePart = useUpdatePart()
 
   const filtered = useMemo(() => {
-    const q = search.toLowerCase().trim()
+    const q = search?.toLowerCase().trim()
     let list = parts?.filter(
       (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.location.toLowerCase().includes(q),
+        p.name.toLowerCase().includes(q || '') ||
+        p.location.toLowerCase().includes(q || ''),
     )
 
     if (sort.dir !== 'none' && list !== undefined) {
@@ -97,23 +98,15 @@ export function ListParts() {
           </CardIcon>
           <CardTitle>
             Estoque
-            {!filtered?.length && (
+            {!!filtered?.length && (
               <Badge variant="info" className="ml-2">
-                {filtered?.length}
+                {filtered?.reduce((acc, cur) => acc + cur.quantity, 0)}
               </Badge>
             )}
           </CardTitle>
         </div>
         <CardAction>
-          <InputGroup>
-            <InputGroupAddon>
-              <Search />
-            </InputGroupAddon>
-            <Input
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Buscar por peça ou local..."
-            />
-          </InputGroup>
+          <SearchParts />
         </CardAction>
       </CardHeader>
       <CardContent>

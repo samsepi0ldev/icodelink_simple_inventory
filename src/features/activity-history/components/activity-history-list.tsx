@@ -26,7 +26,7 @@ export function ActivityHistoryList() {
   } as const
 
   function formattedDate(date: string) {
-    return format(new Date(date), "EEEE, dd 'de' MMMM 'de' yyyy HH:mm", {
+    return format(new Date(date), "dd 'de' MMMM 'de' yyyy '•' HH:mm", {
       locale: ptBR,
     })
   }
@@ -44,7 +44,9 @@ export function ActivityHistoryList() {
       <TableBody>
         {activities?.map((activity) => (
           <TableRow key={activity.id}>
-            <TableCell>#{activity.id}</TableCell>
+            <TableCell className="text-text font-mono">
+              #{activity.id}
+            </TableCell>
             <TableCell>
               <Badge variant={variantType[activity.type]}>
                 <span
@@ -61,7 +63,9 @@ export function ActivityHistoryList() {
               </Badge>
             </TableCell>
             <TableCell>{activity.description}</TableCell>
-            <TableCell>{formattedDate(activity.createdAt)}</TableCell>
+            <TableCell className="font-mono text-text">
+              {formattedDate(activity.createdAt)}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

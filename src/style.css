@@ -16,8 +16,8 @@
 
 :root {
   --radius: 0.625rem;
-  --text: #9ca3af;
-  --text-h: #f3f4f6;
+  --text: #52525b;
+  --text-h: #000000;
   --bg: #16171d;
   --foreground: oklch(0.985 0 0);
   --border: oklch(0.922 0 0);
@@ -33,6 +33,8 @@
 }
 
 .dark {
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
   --bg: #16171d;
   --popover: #16171d;
   --popover-foreground: oklch(0.985 0 0);

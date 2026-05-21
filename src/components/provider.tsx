@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type React from 'react'
 import { Toaster } from 'sonner'
 
@@ -22,7 +21,6 @@ export function Providers({ children }: Providers.Props) {
           } as React.CSSProperties
         }
       />
-      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

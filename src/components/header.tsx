@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { Layers, Sun } from 'lucide-react'
+import { Bell, Layers, Sun } from 'lucide-react'
 
 import { Switch } from '@/components/switch'
 import { useTheme } from '@/hooks/use-theme'
@@ -21,9 +21,17 @@ export function Header() {
             Histórico de atividades
           </CustomLink>
         </nav>
-        <div className="flex items-center gap-x-1 justify-end">
-          <Switch defaultChecked={isDarkMode} onCheckedChange={toggleTheme} />
-          <Sun className="size-4 text-text peer-data-checked:text-text-h transition-colors" />
+        <div className="flex items-center justify-end gap-2">
+          <button
+            type="button"
+            className="size-8 inline-flex items-center justify-center rounded-lg hover:bg-zinc-800 text-text hover:text-zinc-100"
+          >
+            <Bell className="size-4" />
+          </button>
+          <div className="flex items-center gap-x-1 justify-end">
+            <Switch defaultChecked={isDarkMode} onCheckedChange={toggleTheme} />
+            <Sun className="size-4 text-text peer-data-checked:text-text-h transition-colors" />
+          </div>
         </div>
       </header>
     </div>
